@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "name": "Debug (J-Link)",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/Debug/nucleo-f411.elf",
+            "servertype": "jlink",
+            "device": "STM32F411RE",
+            "gdbTarget": "localhost:50000",
+            //"ipAddress": "25.60.77.43",
+            "interface": "swd",
+            "serialNumber": "",
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 84000000,
+                "swoFrequency": 4000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    }
+                ]
+            }
+        },
+    ]
+}
