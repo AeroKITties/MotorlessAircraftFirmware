@@ -31,7 +31,7 @@ void Servo::SetValue(float value)
         value_us = lower_limit + (upper_limit - lower_limit) * (value + 1.0) * 0.5;
     }
 
-    int servo_timer_value = (int)(1000 * (value_us / 20000));
+    int servo_timer_value = (int)(10000 * (value_us / 20000));
     SetServoTimerValueLL(servo_timer_value);
 }
 
