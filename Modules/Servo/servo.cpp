@@ -1,7 +1,7 @@
 #include "servo.hpp"
 
 /*!
- * @brief Конструктор образа сервопривода
+ * @brief
  * @param _servo_number Номер сервопривода (0-9)
  * @param _lower_limit Нижний предел значения сервопривода (например, 1000)
  * @param _upper_limit Верхний предел значения сервопривода (например, 2000)
@@ -10,9 +10,9 @@
 Servo::Servo(int _servo_number, int _lower_limit, int _upper_limit, ServoInputMode _inputMode)
 {
     servo_number = _servo_number;
-    lower_limit = _lower_limit;
-    upper_limit = _upper_limit;
     inputMode = _inputMode;
+
+    SetRange(_lower_limit, _upper_limit);
 }
 
 /*!
@@ -37,37 +37,46 @@ void Servo::SetValue(float value)
 
 void Servo::SetServoTimerValueLL(int timer_value)
 {
-    switch (servo_number)
+    switch (servo_def[servo_number].channel)
     {
-    case 0:
-        htim13.Instance->CCR1 = timer_value;
+    case TIM_CHANNEL_1:
+        servo_def[servo_number].htim->Instance->CCR1 = timer_value;
         break;
-    case 1:
-        htim3.Instance->CCR3 = timer_value;
+    case TIM_CHANNEL_2:
+        servo_def[servo_number].htim->Instance->CCR2 = timer_value;
         break;
-    case 2:
-        htim3.Instance->CCR4 = timer_value;
+    case TIM_CHANNEL_3:
+        servo_def[servo_number].htim->Instance->CCR3 = timer_value;
         break;
-    case 3:
-        htim4.Instance->CCR4 = timer_value;
-        break;
-    case 4:
-        htim4.Instance->CCR3 = timer_value;
-        break;
-    case 5:
-        htim3.Instance->CCR1 = timer_value;
-        break;
-    case 6:
-        htim3.Instance->CCR2 = timer_value;
-        break;
-    case 7:
-        htim12.Instance->CCR1 = timer_value;
-        break;
-    case 8:
-        htim2.Instance->CCR1 = timer_value;
-        break;
-    case 9:
-        htim12.Instance->CCR2 = timer_value;
+    case TIM_CHANNEL_4:
+        servo_def[servo_number].htim->Instance->CCR4 = timer_value;
         break;
     }
+}
+
+/*!
+ * @brief Включение сервопривода
+ */
+void Servo::Enable()
+{
+    HAL_TIM_PWM_Start(servo_def[servo_number].htim, servo_def[servo_number].channel);
+}
+
+/*!
+ * @brief Выключение сервопривода
+ */
+void Servo::Disable()
+{
+    HAL_TIM_PWM_Stop(servo_def[servo_number].htim, servo_def[servo_number].channel);
+}
+
+/*!
+ * @brief  Изменение диапазона работы сервопривода
+ * @param _lower_limit Нижний предел значения сервопривода (например, 1000)
+ * @param _upper_limit Верхний предел значения сервопривода (например, 2000)
+ */
+void Servo::SetRange(int _lower_limit, int _upper_limit)
+{
+    lower_limit = _lower_limit;
+    upper_limit = _upper_limit;
 }
