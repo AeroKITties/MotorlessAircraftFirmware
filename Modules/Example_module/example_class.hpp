@@ -3,11 +3,11 @@
 #include <iostream>
 #include <iomanip>
 
+#include "servo.hpp"
+#include "swo_debug.hpp"
+#include "main.h"
 #include "tim.h"
 #include "spi.h"
-
-#include "servo.hpp"
-#include "swo-debug.hpp"
 extern "C"
 {
 #include "IMU.h"

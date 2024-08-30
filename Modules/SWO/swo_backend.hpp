@@ -10,6 +10,6 @@
 #define ITM_ENA (*(volatile unsigned int *)0xE0000E00)      // Trace Enable Ports Register
 #define ITM_TCR (*(volatile unsigned int *)0xE0000E80)      // Trace control register
 
-void printChar(char c);
-void printCharArray(const char *s);
-void printString(std::string &s);
+void printChar(int port, char c);
+void printCharArray(int port, const char *s);
+void printString(int port, std::string &s);

@@ -25,6 +25,55 @@
                         "port": 0,
                         "showOnStartup": true,
                         "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 1,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 2,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 3,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 4,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 5,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 6,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
+                    },
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 7,
+                        "showOnStartup": true,
+                        "encoding": "utf8"
                     }
                 ]
             }

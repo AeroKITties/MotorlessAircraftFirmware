@@ -64,10 +64,11 @@ target_sources(stm32cubemx PUBLIC
 target_link_directories(stm32cubemx PUBLIC 
 )
 
-target_link_libraries(stm32cubemx PUBLIC  example_module)
+
 target_link_libraries(stm32cubemx PUBLIC  bmi088_legacy)
 target_link_libraries(stm32cubemx PUBLIC  servo)
-target_link_libraries(stm32cubemx PUBLIC  swo-debug)
+target_link_libraries(stm32cubemx PUBLIC  swo_debug)
+target_link_libraries(stm32cubemx PUBLIC  example_module)
 
 
 # Validate that STM32CubeMX code is compatible with C standard

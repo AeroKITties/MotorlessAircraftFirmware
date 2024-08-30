@@ -69,7 +69,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     servo
     bmi088_legacy
-    swo-debug
+    swo_debug
     example_module
 
     # Add user defined libraries
