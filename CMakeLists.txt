@@ -42,6 +42,7 @@ add_subdirectory(cmake/stm32cubemx)
 add_subdirectory(Modules/Servo)
 add_subdirectory(Modules/BMI088_legacy)
 add_subdirectory(Modules/SWO)
+add_subdirectory(Modules/Example_module)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -69,6 +70,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     servo
     bmi088_legacy
     swo-debug
+    example_module
 
     # Add user defined libraries
 )

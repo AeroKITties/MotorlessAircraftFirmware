@@ -45,7 +45,11 @@
         "iostream": "cpp",
         "istream": "cpp",
         "sstream": "cpp",
-        "accel.h": "c"
+        "accel.h": "c",
+        "iomanip": "cpp",
+        "bitset": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp"
     }
     // Пути для cortex-debug не используются. Все нужные папки с файлами следует добавить в системных переменных в PATH
     // "cortex-debug.armToolchainPath.windows": "C:/gcc-arm-none-eabi/bin",

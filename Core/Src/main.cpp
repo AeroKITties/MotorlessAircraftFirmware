@@ -28,6 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "example_class.hpp"
 
 /* USER CODE END Includes */
 
@@ -49,6 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+ExampleClass exampleClass;
 
 /* USER CODE END PV */
 
@@ -108,6 +110,7 @@ int main(void)
   MX_TIM5_Init();
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
+  exampleClass.Configure();
 
   /* USER CODE END 2 */
 
@@ -167,6 +170,18 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM5)
+  {
+    exampleClass.InterruptHandlerTim5();
+  }
+
+  if (htim->Instance == TIM6)
+  {
+    exampleClass.InterruptHandlerTim6();
+  }
+}
 
 /* USER CODE END 4 */
 

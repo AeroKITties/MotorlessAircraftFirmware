@@ -422,29 +422,17 @@ static void writeAddr(uint8_t addr, uint8_t data)
 
 static Vector3 parseRawUInts(uint8_t *rawVals)
 {
-    int16_t x, y, z;
+    int32_t x, y, z;
     Vector3 out;
     // Int casts nescessary for two's complement
-    // x = ((int16_t)(rawVals[1] * 256 + rawVals[0])) * (2 << a_maxRangeBits);
-    // y = ((int16_t)(rawVals[3] * 256 + rawVals[2])) * (2 << a_maxRangeBits);
-    // z = ((int16_t)(rawVals[5] * 256 + rawVals[4])) * (2 << a_maxRangeBits);
-
-    x = ((int16_t)(rawVals[1] * 256 + rawVals[0]));
-    y = ((int16_t)(rawVals[3] * 256 + rawVals[2]));
-    z = ((int16_t)(rawVals[5] * 256 + rawVals[4]));
+    x = ((int16_t)(rawVals[1] * 256 + rawVals[0])) * (2 << a_maxRangeBits);
+    y = ((int16_t)(rawVals[3] * 256 + rawVals[2])) * (2 << a_maxRangeBits);
+    z = ((int16_t)(rawVals[5] * 256 + rawVals[4])) * (2 << a_maxRangeBits);
 
     // Convert units to real units (m/s^2 or ft/s^2)
-    // out.x = (x / 32768.0) * 1.5 * GRAV;
-    // out.z = (z / 32768.0) * 1.5 * GRAV;
-    // out.y = (y / 32768.0) * 1.5 * GRAV;
-
-    // out.x = (x / 32768.0) * 1000 * 6;
-    // out.z = (y / 32768.0) * 1000 * 6;
-    // out.y = (z / 32768.0) * 1000 * 6;
-
-    out.x = x;
-    out.z = y;
-    out.y = z;
+    out.x = (x / 32768.0) * 1.5 * GRAV;
+    out.z = (z / 32768.0) * 1.5 * GRAV;
+    out.y = (y / 32768.0) * 1.5 * GRAV;
 
     return out;
 }
