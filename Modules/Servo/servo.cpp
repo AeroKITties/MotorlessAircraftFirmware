@@ -21,13 +21,16 @@ Servo::Servo(int _servo_number, int _lower_limit, int _upper_limit, ServoInputMo
  */
 void Servo::SetValue(float value)
 {
+
     float value_us;
     if (inputMode == ServoInputMode::UNIDIRECTIONAL)
     {
+        value = std::clamp(value, (float)0.0, (float)1.0);
         value_us = lower_limit + (upper_limit - lower_limit) * value;
     }
     else
     {
+        value = std::clamp(value, (float)-1.0, (float)1.0);
         value_us = lower_limit + (upper_limit - lower_limit) * (value + 1.0) * 0.5;
     }
 

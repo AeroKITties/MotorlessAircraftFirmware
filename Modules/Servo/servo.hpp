@@ -2,6 +2,7 @@
 
 #include "servo_def.hpp"
 #include "tim.h"
+#include <algorithm>
 
 enum ServoInputMode
 {
