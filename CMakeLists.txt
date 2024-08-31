@@ -71,6 +71,4 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     bmi088_legacy
     swo_debug
     example_module
-
-    # Add user defined libraries
 )
