@@ -1,11 +1,10 @@
 #include "example_class.hpp"
 
-ExampleClass::ExampleClass() : elevator_servo(0, 1000, 2000, ServoInputMode::BIDIRECTIONAL)
-{
-}
+#include "stm32f4xx_hal.h"
 
-void ExampleClass::Configure()
-{
+ExampleClass::ExampleClass() : elevator_servo(0, 1000, 2000, ServoInputMode::BIDIRECTIONAL) {}
+
+void ExampleClass::Configure() {
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
@@ -29,22 +28,16 @@ void ExampleClass::Configure()
 /*!
  * @brief 20hz timer interrupt handler
  */
-void ExampleClass::InterruptHandlerTim5()
-{
-    PrintIMUData();
-}
+void ExampleClass::InterruptHandlerTim5() { PrintIMUData(); }
 
 /*!
  * @brief 100hz timer interrupt handler
  */
-void ExampleClass::InterruptHandlerTim6()
-{
-}
+void ExampleClass::InterruptHandlerTim6() {}
 
-void ExampleClass::PrintIMUData()
-{
-    Vector3 accel = ACCEL_READ_ACCELERATION(); // m/s^2
-    Vector3 gyro = GYRO_READ_RATES();          // rad/s
+void ExampleClass::PrintIMUData() {
+    Vector3 accel = ACCEL_READ_ACCELERATION();  // m/s^2
+    Vector3 gyro = GYRO_READ_RATES();           // rad/s
 
     swoTerminal0 << std::fixed << std::setprecision(3);
     swoTerminal0 << "Ax: " << accel.x << "    Ay: " << accel.y << "    Az: " << accel.z;
