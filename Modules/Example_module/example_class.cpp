@@ -2,12 +2,16 @@
 
 #include "stm32f4xx_hal.h"
 
-ExampleClass::ExampleClass() :  elevator_servo(0, 1200, 2200, ServoInputMode::BIDIRECTIONAL), 
+ExampleClass::ExampleClass() :  elevator_servo(0, 1200, 2600, ServoInputMode::BIDIRECTIONAL), 
                                 ailerones_servo(1, 1000, 2000, ServoInputMode::BIDIRECTIONAL), 
                                 f_pitch_stab(0)
 {
-    accel_x_history = std::vector<double> (2, 0);
-    gyro_x_history = std::vector<double> (2, 0);
+    accel_x_history = std::vector<double> (4, 0);
+    gyro_x_history = std::vector<double> (4, 0);
+    accel_y_history = std::vector<double> (4, 0);
+    gyro_y_history = std::vector<double> (4, 0);
+    accel_z_history = std::vector<double> (4, 0);
+    gyro_z_history = std::vector<double> (4, 0);
 }
 
 void ExampleClass::Configure() {
@@ -34,12 +38,12 @@ void ExampleClass::Configure() {
 /*!
  * @brief 20hz timer interrupt handler
  */
-void ExampleClass::InterruptHandlerTim5() { PrintIMUData(); }
+void ExampleClass::InterruptHandlerTim5() { PrintIMUData(); Filter(); Angels(); PitchStab(); RollStab(); }
 
 /*!
  * @brief 100hz timer interrupt handler
  */
-void ExampleClass::InterruptHandlerTim6() {}
+void ExampleClass::InterruptHandlerTim6() {  }
 
 void ExampleClass::PrintIMUData() {
     Vector3 accel = ACCEL_READ_ACCELERATION();  // m/s^2
@@ -49,16 +53,35 @@ void ExampleClass::PrintIMUData() {
     swoTerminal0 << "Ax: " << accel.x << "    Ay: " << accel.y << "    Az: " << accel.z;
     swoTerminal0 << "    Gx: " << gyro.x << "    Gy: " << gyro.y << "    Gz: " << gyro.z << std::endl;
 
-    theta += pow(f, -1) * gyro.y;
-    psi += pow(f, -1) * gyro.x;
+    gamma += (pow(f, -1) * gyro.x); // * 0.8 + (-(3.14/2.0 - acos(-accel.y/9.87))) * 0.2; 
+    theta += (pow(f, -1) * gyro.y); // * 0.8 + (3.14/2.0 - acos(-accel.x/9.87)) * 0.2; 
+    
+    if (! (accel.x == 0 && accel.y == 0 && accel.z == 0)){
+    double theta_add = (3.14/2.0 - acos(-accel.x/9.87));
+    if (!isnan(theta_add)){
+        theta *= 0.6;
+        theta += 0.4 * theta_add;
+    }
+    
+    double gamma_add = (-(3.14/2.0 - acos(-accel.y/9.87)));
+    if (!isnan(gamma_add)){
+        gamma *= 0.6;
+        gamma +=  0.4 * gamma_add;
+    }
+    }
+
     swoTerminal1 << "   theta = " << theta/3.1415*180 << std::endl;
-    swoTerminal1 << "   psi = " << psi/3.1415*180 << std::endl;
+    swoTerminal1 << "   gamma = " << gamma/3.1415*180 << std::endl;
 
     swoTerminal2 << "elevator_servo = " << theta/3.1415*5.5 << std::endl;
-    swoTerminal2 << "ailerones_servo = " << psi/3.1415*7 << std::endl;
+    swoTerminal2 << "ailerones_servo = " << gamma/3.1415*7 << std::endl;
 
     swoTerminal3 << std::fixed << std::setprecision(3);
     ax = accel.x;
     ax_ = AccelFilter(accel_x_history, accel.x);
     swoTerminal3 << "Ax: " << ax << "    Ax_: " << ax_ << std::endl;
+}
+
+void ExampleClass::Angels() {
+
 }

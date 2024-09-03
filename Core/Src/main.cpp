@@ -113,6 +113,8 @@ int main(void) {
     MX_TIM6_Init();
     /* USER CODE BEGIN 2 */
     exampleClass.Configure();
+    exampleClass.EnablePitchStab();
+    exampleClass.EnableRollStab();
 
     /* USER CODE END 2 */
 

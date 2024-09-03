@@ -1,3 +1,4 @@
+#include "Vectors.h"
 #include "example_class.hpp"
 #include "stm32f4xx_hal.h"
 
@@ -76,8 +77,24 @@ double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new
     new_elem = get_average(accel_history, d); 
 
     accel_history.erase(accel_history.begin());
-    accel_history.pop_back();
-    accel_history.push_back(new_elem);
     return new_elem;
 }
 
+
+void ExampleClass::EnableFilter()
+{
+    f_filter = 1;
+}
+
+void ExampleClass::DisableFilter()
+{
+    f_filter = 0;
+}
+
+void ExampleClass::Filter()
+{
+    if (f_filter){
+        accel = Vector3{AccelFilter(accel_x_history, accel.x), AccelFilter(accel_y_history, accel.y), AccelFilter(accel_z_history, accel.z)};
+        gyro = Vector3{AccelFilter(gyro_x_history, gyro.x), AccelFilter(gyro_y_history, gyro.y), AccelFilter(gyro_z_history, gyro.z)};
+    }
+}
