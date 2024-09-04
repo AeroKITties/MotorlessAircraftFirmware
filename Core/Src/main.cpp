@@ -19,19 +19,21 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#include "fatfs.h"
 #include "gpio.h"
 #include "i2c.h"
-#include "main.h"
 #include "sdio.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb_otg.h"
 
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "example_class.hpp"
+// extern "C" {
+// #include "sd_file_handling.h"
+// }
 
 /* USER CODE END Includes */
 
@@ -97,7 +99,7 @@ int main(void) {
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
     MX_I2C1_Init();
-    // MX_SDIO_SD_Init();
+    MX_SDIO_SD_Init();
     MX_SPI1_Init();
     MX_SPI2_Init();
     MX_TIM2_Init();
@@ -111,6 +113,7 @@ int main(void) {
     MX_USB_OTG_FS_PCD_Init();
     MX_TIM5_Init();
     MX_TIM6_Init();
+    MX_FATFS_Init();
     /* USER CODE BEGIN 2 */
     exampleClass.Configure();
 
