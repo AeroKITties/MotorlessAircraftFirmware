@@ -3,7 +3,7 @@
 #include "stm32f4xx_hal.h"
 
 ExampleClass::ExampleClass() :  elevator_servo(0, 1200, 2600, ServoInputMode::BIDIRECTIONAL), 
-                                ailerones_servo(1, 1000, 2000, ServoInputMode::BIDIRECTIONAL), 
+                                ailerones_servo(1, 1040, 2040, ServoInputMode::BIDIRECTIONAL), 
                                 f_pitch_stab(0)
 {
     accel_x_history = std::vector<double> (4, 0);
@@ -53,8 +53,8 @@ void ExampleClass::PrintIMUData() {
     swoTerminal0 << "Ax: " << accel.x << "    Ay: " << accel.y << "    Az: " << accel.z;
     swoTerminal0 << "    Gx: " << gyro.x << "    Gy: " << gyro.y << "    Gz: " << gyro.z << std::endl;
 
-    gamma += (pow(f, -1) * gyro.x); // * 0.8 + (-(3.14/2.0 - acos(-accel.y/9.87))) * 0.2; 
-    theta += (pow(f, -1) * gyro.y); // * 0.8 + (3.14/2.0 - acos(-accel.x/9.87)) * 0.2; 
+    gamma += (pow(f, -1) * gyro.x);
+    theta += (pow(f, -1) * gyro.y);
     
     if (! (accel.x == 0 && accel.y == 0 && accel.z == 0)){
     double theta_add = (3.14/2.0 - acos(-accel.x/9.87));
@@ -65,8 +65,9 @@ void ExampleClass::PrintIMUData() {
     
     double gamma_add = (-(3.14/2.0 - acos(-accel.y/9.87)));
     if (!isnan(gamma_add)){
-        gamma *= 0.6;
-        gamma +=  0.4 * gamma_add;
+        //gamma *= 0.6;
+        //gamma +=  0.4 * gamma_add;
+        gamma = gamma_add;
     }
     }
 

@@ -46,7 +46,7 @@ double crop_double(double d){
     return n;
 }
 
-double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new_elem)
+double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new_elem, bool make_discret)
 {
     accel_history.push_back(new_elem);
     int max_gap = accel_x_history.size();
@@ -74,7 +74,20 @@ double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new
         new_elem = get_average(accel_history, d); 
     else
         new_elem = get_weight_average(accel_history, d); */
-    new_elem = get_average(accel_history, d); 
+    if (make_discret){
+        double n;
+        new_elem = get_average(accel_history, d); 
+        if (new_elem - int(new_elem) < 0.3){
+            n = new_elem - int(new_elem);
+        }
+        else if (new_elem - int(new_elem) < 0.6){
+            n = new_elem - int(new_elem) + 0.4;
+        }
+        else{
+            n = new_elem -= int(new_elem) + 0.8;
+        }
+        new_elem = n;
+    }
 
     accel_history.erase(accel_history.begin());
     return new_elem;
@@ -94,7 +107,7 @@ void ExampleClass::DisableFilter()
 void ExampleClass::Filter()
 {
     if (f_filter){
-        accel = Vector3{AccelFilter(accel_x_history, accel.x), AccelFilter(accel_y_history, accel.y), AccelFilter(accel_z_history, accel.z)};
+        accel = Vector3{AccelFilter(accel_x_history, accel.x, 1), AccelFilter(accel_y_history, accel.y, 1), AccelFilter(accel_z_history, accel.z, 1)};
         gyro = Vector3{AccelFilter(gyro_x_history, gyro.x), AccelFilter(gyro_y_history, gyro.y), AccelFilter(gyro_z_history, gyro.z)};
     }
 }

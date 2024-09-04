@@ -57,5 +57,5 @@ class ExampleClass {
     
     float ax;
     float ax_;
-    double AccelFilter(std::vector<double> & accel_history, double new_elem);
+    double AccelFilter(std::vector<double> & accel_history, double new_elem, bool make_discret = 0);
 };
