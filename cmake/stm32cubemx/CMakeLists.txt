@@ -18,6 +18,9 @@ target_include_directories(stm32cubemx PUBLIC
     ../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
     ../../Drivers/CMSIS/Device/ST/STM32F4xx/Include
     ../../Drivers/CMSIS/Include
+    ../../FATFS/Target
+    ../../FATFS/App
+    ../../Middlewares/Third_Party/FatFs/src
 )
 
 target_sources(stm32cubemx PUBLIC
@@ -59,6 +62,15 @@ target_sources(stm32cubemx PUBLIC
     ../../Core/Src/sysmem.c
     ../../Core/Src/syscalls.c
     ../../startup_stm32f405xx.s
+    ../../Middlewares/Third_Party/FatFs/src/diskio.c
+    ../../Middlewares/Third_Party/FatFs/src/ff.c
+    ../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+    ../../Middlewares/Third_Party/FatFs/src/option/syscall.c
+    ../../Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
+    ../../FATFS/Target/bsp_driver_sd.c
+    ../../FATFS/Target/sd_diskio.c
+    ../../FATFS/Target/fatfs_platform.c
+    ../../FATFS/App/fatfs.c
 )
 
 target_link_directories(stm32cubemx PUBLIC 
@@ -69,6 +81,7 @@ target_link_libraries(stm32cubemx PUBLIC  bmi088_legacy)
 target_link_libraries(stm32cubemx PUBLIC  servo)
 target_link_libraries(stm32cubemx PUBLIC  swo_debug)
 target_link_libraries(stm32cubemx PUBLIC  example_module)
+target_link_libraries(stm32cubemx PUBLIC  sd_card)
 
 
 # Validate that STM32CubeMX code is compatible with C standard
