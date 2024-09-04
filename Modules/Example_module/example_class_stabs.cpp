@@ -17,7 +17,7 @@ void ExampleClass::DisablePitchStab()
 void ExampleClass::PitchStab()
 {
     if (!f_pitch_stab){ return; }
-    double k = 8;
+    double k = 7;
     double servo_in = (theta - 0.15)/3.1415 * k - gyro.y * 2;
     if (servo_in > 1) servo_in = 1;
     if (servo_in < -1) servo_in = -1;

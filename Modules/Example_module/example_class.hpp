@@ -11,6 +11,7 @@
 
 extern "C" {
 #include "IMU.h"
+#include "sd_file_handling.h"
 }
 
 class ExampleClass {
@@ -54,7 +55,8 @@ class ExampleClass {
     float theta;
     float gamma;
     void PrintIMUData();
-    
+    float start_time; 
+
     float ax;
     float ax_;
     double AccelFilter(std::vector<double> & accel_history, double new_elem, bool make_discret = 0);
