@@ -39,7 +39,7 @@ void ExampleClass::DisableRollStab()
 void ExampleClass::RollStab()
 {
     if (!f_roll_stab){ return; }
-    double k = 5.5;
+    double k = 7.5;
     double servo_in = gamma/3.1415 * k - gyro.x*1;
     if (servo_in > 1) servo_in = 1;
     if (servo_in < -1) servo_in = -1;

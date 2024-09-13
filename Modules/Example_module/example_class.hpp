@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
+#include "logger.hpp"
 #include "main.h"
 #include "servo.hpp"
 #include "spi.h"
@@ -17,6 +18,8 @@ extern "C" {
 class ExampleClass {
    public:
     ExampleClass();
+
+    void Update();
     void Configure();
     void InterruptHandlerTim5();  // 20hz
     void InterruptHandlerTim6();  // 100hz
@@ -33,7 +36,7 @@ class ExampleClass {
     void PitchStab();
     void RollStab();
     void Filter();
-    void Angels();
+    void Angles();
     //Настройки фильтра под 20Гц
 
     std::vector<double> accel_x_history;
@@ -60,4 +63,6 @@ class ExampleClass {
     float ax;
     float ax_;
     double AccelFilter(std::vector<double> & accel_history, double new_elem, bool make_discret = 0);
+    bool tim5_flag = false;
+    bool tim6_flag = false;
 };

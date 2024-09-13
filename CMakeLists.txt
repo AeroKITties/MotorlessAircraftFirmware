@@ -48,7 +48,6 @@ add_subdirectory(Modules/Example_module)
 add_subdirectory(Modules/ExpandedVector3)
 add_subdirectory(Modules/SD_card)
 
-
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths

@@ -32,8 +32,9 @@
 /* USER CODE BEGIN Includes */
 #include "example_class.hpp"
  extern "C" {
- #include "sd_file_handling.h"
+    #include "sd_file_handling.h"
  }
+#include "logger.hpp"
 
 /* USER CODE END Includes */
 
@@ -115,7 +116,7 @@ int main(void) {
     MX_TIM6_Init();
     MX_FATFS_Init();
     /* USER CODE BEGIN 2 */
-
+    logger.Configure();
     exampleClass.Configure();
     exampleClass.EnablePitchStab();
     exampleClass.EnableRollStab();
@@ -129,6 +130,8 @@ int main(void) {
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
+        exampleClass.Update();
+        logger.WriteCachedLines();
     }
     /* USER CODE END 3 */
 }
@@ -180,7 +183,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         exampleClass.InterruptHandlerTim5();
     }
 
-    if (htim->Instance == TIM6) {
+    else if (htim->Instance == TIM6) {
         exampleClass.InterruptHandlerTim6();
     }
 }

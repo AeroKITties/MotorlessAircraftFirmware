@@ -13,5 +13,4 @@ target_link_libraries(example_module PUBLIC servo)
 target_link_libraries(example_module PUBLIC bmi088_legacy)
 target_link_libraries(example_module PUBLIC swo_debug)
 target_link_libraries(example_module PUBLIC expanded_vector3)
-
 target_link_libraries(example_module PUBLIC sd_card)
