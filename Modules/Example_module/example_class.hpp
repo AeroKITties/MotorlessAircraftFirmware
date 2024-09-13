@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
+#include "logger.hpp"
 #include "main.h"
 #include "servo.hpp"
 #include "spi.h"
@@ -16,6 +17,8 @@ extern "C" {
 class ExampleClass {
    public:
     ExampleClass();
+
+    void Update();
     void Configure();
     void InterruptHandlerTim5();  // 20hz
     void InterruptHandlerTim6();  // 100hz
@@ -23,4 +26,7 @@ class ExampleClass {
    private:
     Servo elevator_servo;
     void PrintIMUData();
+
+    bool tim5_flag = false;
+    bool tim6_flag = false;
 };
