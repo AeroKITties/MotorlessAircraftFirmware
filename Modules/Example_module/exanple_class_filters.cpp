@@ -57,13 +57,13 @@ double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new
     int counter_max_gap = 0;
     if (is_deltas_trend(accel_history))
     {
-        d -= 2; 
+        d -= 1; 
         counter_max_gap = 0;
         if (d < min_gap)
             d = min_gap;
     }
     else{
-        d += 2;
+        d += 1;
         if (d > max_gap)
         {
             counter_max_gap += 1;

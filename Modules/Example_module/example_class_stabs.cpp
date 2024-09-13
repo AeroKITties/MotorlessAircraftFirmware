@@ -18,7 +18,7 @@ void ExampleClass::PitchStab()
 {
     if (!f_pitch_stab){ return; }
     double k = 7;
-    double servo_in = (theta - 0.15)/3.1415 * k - gyro.y * 2;
+    double servo_in = (theta - 0)/3.1415 * k - gyro.y * 2;
     if (servo_in > 1) servo_in = 1;
     if (servo_in < -1) servo_in = -1;
     elevator_servo.SetValue(servo_in);
@@ -40,7 +40,7 @@ void ExampleClass::RollStab()
 {
     if (!f_roll_stab){ return; }
     double k = 7.5;
-    double servo_in = gamma/3.1415 * k - gyro.x*1;
+    double servo_in = (gamma+0.05)/3.1415 * k - gyro.x*1;
     if (servo_in > 1) servo_in = 1;
     if (servo_in < -1) servo_in = -1;
     ailerones_servo.SetValue(servo_in);

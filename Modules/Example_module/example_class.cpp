@@ -87,10 +87,11 @@ void ExampleClass::PrintIMUData() {
     if (!isnan(gamma_add)){
         gamma *= 0.6;
         gamma +=  0.4 * gamma_add;
-        //gamma = gamma_add;
     }
     }
     }
+
+    logger.LogAngles(theta, gamma);
 
     swoTerminal1 << "   theta = " << theta/3.1415*180 << std::endl;
     swoTerminal1 << "   gamma = " << gamma/3.1415*180 << std::endl;

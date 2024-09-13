@@ -18,3 +18,8 @@ void Logger::LogServoOutput(float servo_elevator, float servo_ailerones){
     cache << "SERVO " << HAL_GetTick() << " " << servo_elevator << " " << servo_ailerones << std::endl;
     cache_size++;
 }
+
+void Logger::LogAngles(float pitch, float roll){
+    cache << "ANGLES " << HAL_GetTick() << " " << pitch << " " << roll << std::endl;
+    cache_size++;
+}
