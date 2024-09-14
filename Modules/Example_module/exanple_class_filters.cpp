@@ -49,34 +49,9 @@ double crop_double(double d){
 double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new_elem, bool make_discret)
 {
     accel_history.push_back(new_elem);
-    int max_gap = accel_x_history.size();
-    double min_gap = f*0.05;
-    if (min_gap > max_gap) {min_gap = 1;}
-    static int d = max_gap;
-
-    int counter_max_gap = 0;
-    if (is_deltas_trend(accel_history))
-    {
-        d -= 1; 
-        counter_max_gap = 0;
-        if (d < min_gap)
-            d = min_gap;
-    }
-    else{
-        d += 1;
-        if (d > max_gap)
-        {
-            counter_max_gap += 1;
-            d = max_gap;
-        }
-    }
-/*    if (counter_max_gap > f/2)
-        new_elem = get_average(accel_history, d); 
-    else
-        new_elem = get_weight_average(accel_history, d); */
+    new_elem = get_average(accel_history, accel_history.size()); 
     if (make_discret){
         double n;
-        new_elem = get_average(accel_history, d); 
         if (new_elem - int(new_elem) < 0.3){
             n = new_elem - int(new_elem);
         }
@@ -88,7 +63,6 @@ double ExampleClass::AccelFilter(std::vector<double> & accel_history, double new
         }
         new_elem = n;
     }
-
     accel_history.erase(accel_history.begin());
     return new_elem;
 }
@@ -106,6 +80,10 @@ void ExampleClass::DisableFilter()
 
 void ExampleClass::Filter()
 {
+    double xx = accel.x;
+    double yy = accel.y;
+    double zz = accel.z;
+    logger.LogAccelRawDataNoF(xx, yy, zz, gyro.x, gyro.y, gyro.z);
     if (f_filter){
         accel = Vector3{AccelFilter(accel_x_history, accel.x, 1), AccelFilter(accel_y_history, accel.y, 1), AccelFilter(accel_z_history, accel.z, 1)};
         gyro = Vector3{AccelFilter(gyro_x_history, gyro.x), AccelFilter(gyro_y_history, gyro.y), AccelFilter(gyro_z_history, gyro.z)};

@@ -118,8 +118,7 @@ int main(void) {
     /* USER CODE BEGIN 2 */
     logger.Configure();
     exampleClass.Configure();
-    exampleClass.EnablePitchStab();
-    exampleClass.EnableRollStab();
+    exampleClass.EnableFilter();
 
 
     /* USER CODE END 2 */

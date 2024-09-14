@@ -14,6 +14,12 @@ void Logger::LogAccelRawData(float ax, float ay, float az, float gx, float gy, f
     cache_size++;
 }
 
+void Logger::LogAccelRawDataNoF(float ax, float ay, float az, float gx, float gy, float gz) {
+    cache << "NO_F_IMU_RAW " << HAL_GetTick() << " " << ax << " " << ay << " " << az << " " << gx << " " << gy << " " << gz
+          << std::endl;
+    cache_size++;
+}
+
 void Logger::LogServoOutput(float servo_elevator, float servo_ailerones){
     cache << "SERVO " << HAL_GetTick() << " " << servo_elevator << " " << servo_ailerones << std::endl;
     cache_size++;
@@ -21,5 +27,10 @@ void Logger::LogServoOutput(float servo_elevator, float servo_ailerones){
 
 void Logger::LogAngles(float pitch, float roll){
     cache << "ANGLES " << HAL_GetTick() << " " << pitch << " " << roll << std::endl;
+    cache_size++;
+}
+
+void Logger::LogPID(char type, float p, float i, float d){
+    cache << "PID " << HAL_GetTick() << " " << type << " " << p << " " << i << " " << d << std::endl;
     cache_size++;
 }

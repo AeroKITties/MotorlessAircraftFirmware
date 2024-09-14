@@ -15,6 +15,8 @@ class Logger {
     void LogServoOutput(float servo_elevator, float servo_ailerones);
     void LogAngles(float pitch, float roll);
     void LogAccelRawData(float ax, float ay, float az, float gx, float gy, float gz);
+    void LogAccelRawDataNoF(float ax, float ay, float az, float gx, float gy, float gz);
+    void LogPID(char type, float p, float i, float d);
 
    private:
     char logFolder[32] = "logs";
