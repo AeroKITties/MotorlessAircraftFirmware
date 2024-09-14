@@ -45,6 +45,7 @@ add_subdirectory(Modules/Servo)
 add_subdirectory(Modules/BMI088_legacy)
 add_subdirectory(Modules/SWO)
 add_subdirectory(Modules/Example_module)
+add_subdirectory(Modules/ExpandedVector3)
 add_subdirectory(Modules/SD_card)
 
 # Link directories setup
@@ -74,5 +75,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     bmi088_legacy
     swo_debug
     example_module
+    expanded_vector3
     sd_card
 )

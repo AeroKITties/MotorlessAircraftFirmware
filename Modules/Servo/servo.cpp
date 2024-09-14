@@ -14,19 +14,22 @@ Servo::Servo(int _servo_number, int _lower_limit, int _upper_limit, ServoInputMo
     SetRange(_lower_limit, _upper_limit);
 }
 
+float Servo::GetValue() { return value; }
+
 /*!
  * @brief Управление углом отклонения сервопривода
  * @param value Значение отклонения. (от 0.0 до 1.0 или от -1.0 до 1.0 в зависимости от установленного вида входного
  * сигнала)
  */
-void Servo::SetValue(float value) {
+void Servo::SetValue(float value_) {
+    value = value_;
     float value_us;
     if (inputMode == ServoInputMode::UNIDIRECTIONAL) {
-        value = std::clamp(value, (float)0.0, (float)1.0);
-        value_us = lower_limit + (upper_limit - lower_limit) * value;
+        value_ = std::clamp(value_, (float)0.0, (float)1.0);
+        value_us = lower_limit + (upper_limit - lower_limit) * value_;
     } else {
-        value = std::clamp(value, (float)-1.0, (float)1.0);
-        value_us = lower_limit + (upper_limit - lower_limit) * (value + 1.0) * 0.5;
+        value_ = std::clamp(value_, (float)-1.0, (float)1.0);
+        value_us = lower_limit + (upper_limit - lower_limit) * (value_ + 1.0) * 0.5;
     }
 
     int servo_timer_value = (int)(10000 * (value_us / 20000));
