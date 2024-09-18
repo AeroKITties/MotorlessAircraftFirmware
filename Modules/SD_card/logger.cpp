@@ -13,6 +13,8 @@ extern "C" {
 Logger::Logger() {}
 
 void Logger::Configure() {
+    cache << std::setprecision(3) << std::fixed;
+
     Mount_SD("/");
 
     uint16_t file_count = 0;

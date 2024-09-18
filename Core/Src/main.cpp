@@ -31,6 +31,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "example_class.hpp"
+ extern "C" {
+    #include "sd_file_handling.h"
+ }
 #include "logger.hpp"
 
 /* USER CODE END Includes */
@@ -115,6 +118,8 @@ int main(void) {
     /* USER CODE BEGIN 2 */
     logger.Configure();
     exampleClass.Configure();
+    exampleClass.EnableFilter();
+
 
     /* USER CODE END 2 */
 
@@ -125,6 +130,7 @@ int main(void) {
 
         /* USER CODE BEGIN 3 */
         exampleClass.Update();
+        logger.WriteCachedLines();
     }
     /* USER CODE END 3 */
 }
