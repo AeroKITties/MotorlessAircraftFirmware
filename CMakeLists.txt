@@ -43,10 +43,12 @@ add_executable(${CMAKE_PROJECT_NAME})
 add_subdirectory(cmake/stm32cubemx)
 add_subdirectory(Modules/Servo)
 add_subdirectory(Modules/BMI088_legacy)
+add_subdirectory(Modules/BMI088)
 add_subdirectory(Modules/SWO)
 add_subdirectory(Modules/Example_module)
 add_subdirectory(Modules/ExpandedVector3)
 add_subdirectory(Modules/SD_card)
+add_subdirectory(Modules/Eigen)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -60,7 +62,6 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined include paths
 )
 
 # Add project symbols (macros)
@@ -77,4 +78,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     example_module
     expanded_vector3
     sd_card
+    bmi088
+    Eigen3::Eigen
 )
