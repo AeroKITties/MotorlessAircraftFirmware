@@ -74,7 +74,7 @@
     "clangd.arguments": [
         "-background-index",
         "-compile-commands-dir=./build/Debug",
-        "--query-driver=/home/crucian/Utilits/gcc-arm-none-eabi/bin/arm-none-eabi-g++"
+        "--query-driver=/home/crucian/Utilits/gcc-arm-none-eabi/bin/arm-none-eabi-g*"
     ],
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4,TabWidth: 4}",
 }
