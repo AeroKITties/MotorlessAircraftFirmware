@@ -49,6 +49,7 @@ add_subdirectory(Modules/Example_module)
 add_subdirectory(Modules/ExpandedVector3)
 add_subdirectory(Modules/SD_card)
 add_subdirectory(Modules/Eigen)
+add_subdirectory(Modules/Rangefinder)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -80,4 +81,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     sd_card
     bmi088
     Eigen3::Eigen
+    rangefinder
 )

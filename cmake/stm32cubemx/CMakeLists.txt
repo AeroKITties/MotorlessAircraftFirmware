@@ -82,6 +82,7 @@ target_link_libraries(stm32cubemx PUBLIC  servo)
 target_link_libraries(stm32cubemx PUBLIC  swo_debug)
 target_link_libraries(stm32cubemx PUBLIC  example_module)
 target_link_libraries(stm32cubemx PUBLIC  sd_card)
+target_link_libraries(stm32cubemx PUBLIC  rangefinder)
 
 
 # Validate that STM32CubeMX code is compatible with C standard

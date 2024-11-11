@@ -19,11 +19,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#include <stdint.h>
+
 #include "fatfs.h"
 #include "gpio.h"
 #include "i2c.h"
 #include "sdio.h"
 #include "spi.h"
+#include "stm32f4xx_hal.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb_otg.h"
@@ -34,6 +37,7 @@
 extern "C" {
 #include "sd_file_handling.h"
 }
+#include "hcsr04.hpp"
 #include "logger.hpp"
 
 /* USER CODE END Includes */
@@ -57,6 +61,7 @@ extern "C" {
 
 /* USER CODE BEGIN PV */
 ExampleClass exampleClass;
+uint8_t UART1_rxBuffer[2] = {0};
 
 /* USER CODE END PV */
 
@@ -116,6 +121,7 @@ int main(void) {
     MX_TIM6_Init();
     MX_FATFS_Init();
     /* USER CODE BEGIN 2 */
+
     logger.Configure();
     exampleClass.Configure();
     exampleClass.EnableFilter();
@@ -184,6 +190,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     else if (htim->Instance == TIM6) {
         exampleClass.InterruptHandlerTim6();
     }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    uint16_t range = (uint16_t)(UART1_rxBuffer[1] << 8 | UART1_rxBuffer[0]);
+    rangefinder.setRange(range);
+    HAL_UART_Receive_IT(&huart1, UART1_rxBuffer, 2);
 }
 
 /* USER CODE END 4 */
