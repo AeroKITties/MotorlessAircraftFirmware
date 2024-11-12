@@ -113,6 +113,8 @@ void ExampleClass::Angles() {
 void ExampleClass::Update() {
     if (tim5_flag) {
         tim5_flag = false;
+        rangefinder.updateRange();
+        swoTerminal4 << rangefinder.getRange() << "\n";
     }
 
     if (tim6_flag) {

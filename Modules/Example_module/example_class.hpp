@@ -9,6 +9,7 @@
 #include "spi.h"
 #include "swo_debug.hpp"
 #include "tim.h"
+#include "hcsr04.hpp"
 
 extern "C" {
 #include "IMU.h"

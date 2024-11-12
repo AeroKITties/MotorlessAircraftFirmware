@@ -61,7 +61,7 @@ extern "C" {
 
 /* USER CODE BEGIN PV */
 ExampleClass exampleClass;
-uint8_t UART1_rxBuffer[2] = {0};
+
 
 /* USER CODE END PV */
 
@@ -121,6 +121,7 @@ int main(void) {
     MX_TIM6_Init();
     MX_FATFS_Init();
     /* USER CODE BEGIN 2 */
+    
 
     logger.Configure();
     exampleClass.Configure();
@@ -193,9 +194,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-    uint16_t range = (uint16_t)(UART1_rxBuffer[1] << 8 | UART1_rxBuffer[0]);
-    rangefinder.setRange(range);
-    HAL_UART_Receive_IT(&huart1, UART1_rxBuffer, 2);
+
 }
 
 /* USER CODE END 4 */

@@ -69,8 +69,8 @@
         "xutility": "cpp"
     },
     // Пути для cortex-debug не используются. Все нужные папки с файлами следует добавить в системных переменных в PATH
-    // "cortex-debug.armToolchainPath.windows": "C:/gcc-arm-none-eabi/bin",
-    // "cortex-debug.JLinkGDBServerPath.windows": "C:/Program Files/SEGGER/JLink/JLinkGDBServerCL",
+    "cortex-debug.armToolchainPath.windows": "C:/gcc-arm-none-eabi/bin",
+    "cortex-debug.JLinkGDBServerPath.windows": "C:/Program Files/SEGGER/JLink/JLinkGDBServerCL",
     "clangd.arguments": [
         "-background-index",
         "-compile-commands-dir=./build/Debug",
